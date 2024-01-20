@@ -5,6 +5,7 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from config import TOKEN
+from background import keep_alive
 
 bot = Bot(TOKEN)
 dp = Dispatcher(bot)
@@ -17,4 +18,6 @@ async def echo_send(message: types.Message):    # start(message: types.Message):
         await message.reply('Ненормативная лексика в чате запрещена')
         await message.delete()
 
-executor.start_polling(dp, skip_updates=True)
+keep_alive()
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
